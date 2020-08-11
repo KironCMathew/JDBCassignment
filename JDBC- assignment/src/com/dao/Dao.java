@@ -23,7 +23,7 @@ public class Dao {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankdb", "root", "1234");
 			ps = conn.prepareStatement("insert into Account values(?,?,?,?)");
 			ps.setString(1, id);
 			ps.setString(2, name);
@@ -48,7 +48,7 @@ public class Dao {
 		try {
 			if (deposit > 0) {
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "1234");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankdb", "root", "1234");
 
 				ms = conn.prepareStatement("select deposit from account");
 				ResultSet rs = ms.executeQuery();
@@ -82,7 +82,7 @@ public class Dao {
 		try {
 			if (withdraw > 0) {
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "1234");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankdb", "root", "1234");
 				ms = conn.prepareStatement("select deposit from account");
 				ResultSet rs = ms.executeQuery();
 				ps = conn.prepareStatement("update account set deposit= ? where id=?");
@@ -112,7 +112,7 @@ public class Dao {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankdb", "root", "1234");
 			ps = conn.prepareStatement("insert into Loan values(?,?,?)");
 			ps.setString(1, loan_id);
 			ps.setString(2, loan_type);
@@ -136,7 +136,7 @@ public class Dao {
 		try {
 			if (loan_amount > 0) {
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "1234");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankdb", "root", "1234");
 
 				ms = conn.prepareStatement(
 						"select loan.loanAmount, account.deposit from loan inner join account on loan.loanId = account.id");
@@ -176,7 +176,7 @@ public class Dao {
 	public Account getAccountDetails(String id) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankdb", "root", "1234");
 			ps = conn.prepareStatement("select id, name, address, deposit from Account where id = ?");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -200,7 +200,7 @@ public class Dao {
 	public Loan getLoanDetails(String loan_id) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankdb", "root", "1234");
 			ps = conn.prepareStatement("select loanId, loanType, loanAmount from loan where loanId = ?");
 			ps.setString(1, loan_id);
 			ResultSet rs = ps.executeQuery();
